@@ -1,3 +1,4 @@
+import 'package:mob/stores/todo_store.dart';
 import 'package:mobx/mobx.dart';
 
 part 'list_store.g.dart';
@@ -17,12 +18,11 @@ abstract class _List with Store {
   @computed
   bool get isNotEmptyString => newTodoTitle.isNotEmpty;
 
-  // Listas precisam ser observáveis para ter reatividade uma simples List na funciona
-  ObservableList<String> todoList = ObservableList<String>();
+  ObservableList<TodoStore> todoList = ObservableList<TodoStore>();
 
   @action
   void addTodo() {
-    todoList.add(newTodoTitle);
+    todoList.add(TodoStore(newTodoTitle));
     newTodoTitle = '';
   }
 }

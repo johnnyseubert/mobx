@@ -43,10 +43,19 @@ class ListScreen extends StatelessWidget {
                   return ListView.builder(
                     itemCount: listStore.todoList.length,
                     itemBuilder: (context, index) {
+                      final todo = listStore.todoList[index];
+
                       return Card(
-                        child: ListTile(
-                          title: Text('Tarefa ${listStore.todoList[index]}'),
-                          onTap: () {},
+                        child: Observer(
+                          builder: (context) {
+                            return ListTile(
+                              title: Text(
+                                'Tarefa ${todo.title}',
+                              ),
+                              trailing: Text(todo.done ? 'OK' : ''),
+                              onTap: todo.toggleDone,
+                            );
+                          },
                         ),
                       );
                     },
